@@ -58,6 +58,7 @@ grunt.initConfig({
 
 This plugin can be customized by specifying the following options:
 
+* `customRegexGenerator`: A function that accepts two arguments default or set `opts.namespace` and default or set `opts.methods` and expects a regex object to be the returned value. If not specified, the default regex will be used. Can be seen on `tasks/lib/removelogging.js` - `line 25`
 * `replaceWith`: A value to replace logging statements with. This option defaults to an empty string. If you use fancy statements like `console && console.log("foo");`, you may choose to specify a `replaceWith` value like `0;` so that your scripts don't completely break.
 * `namespace`: An array of object names that logging methods are attached to.
 Defaults to `[ 'console', 'window.console' ]`. If you use a custom logger, like

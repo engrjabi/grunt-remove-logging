@@ -21,7 +21,11 @@ exports.init = function(grunt) {
       opts.verbose = true;
     }
 
-    rConsole = new RegExp("(" + opts.namespace.join("|") + ")" + ".(?:" + opts.methods.join("|") + ")\\s{0,}\\([^;]*\\)(?!\\s*[;,]?\\s*\\/\\*\\s*RemoveLogging:skip\\s*\\*\\/)\\s{0,};?", "gi");
+    if(!("customRegexGenerator" in opts)) {
+     	rConsole = new RegExp("(" + opts.namespace.join("|") + ")" + ".(?:" + opts.methods.join("|") + ")\\s{0,}\\([^;]*\\)(?!\\s*[;,]?\\s*\\/\\*\\s*RemoveLogging:skip\\s*\\*\\/)\\s{0,};?", "gi");
+    } else {
+     	rConsole = opts.customRegexGenerator(opts.namespace, opts.methods);
+    }
 
     src = src.replace(rConsole, function() {
       counter++;
